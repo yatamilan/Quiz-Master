@@ -1,0 +1,5 @@
+#Requirements for this project
+## python libraries 
+1. pip install flask
+### Optional Libraries (If Needed for Future Improvements)
+2. pip install flask-sqlalchemy flask-login
