@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/Images/background.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            margin-top: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ff6f00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: #ff3d00;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Quiz App!</h1>
+    <p>Choose a difficulty level:</p>
+    <a href="{{ url_for('quiz', difficulty='easy') }}"><button>Easy</button></a>
+    <a href="{{ url_for('quiz', difficulty='medium') }}"><button>Medium</button></a>
+    <a href="{{ url_for('quiz', difficulty='hard') }}"><button>Hard</button></a>
+</body>
+</html>

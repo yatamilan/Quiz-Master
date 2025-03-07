@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quiz Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('/static/Images/luffy.png');
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .score {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .question-box {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid white;
+        }
+        .correct { color: #4CAF50; font-weight: bold; }
+        .incorrect { color: #FF5733; font-weight: bold; }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover { background-color: #117a8b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Result</h1>
+        <p class="score">Your Score: <strong>{{ score }} / {{ total }}</strong></p>
+
+        <h2>Review Your Answers:</h2>
+        {% for question, user_answer, correct_answer in results %}
+        <div class="question-box">
+            <p><strong>Q: {{ question }}</strong></p>
+            <p>Your Answer: 
+                <span class="{% if user_answer == correct_answer %}correct{% else %}incorrect{% endif %}">
+                    {{ user_answer if user_answer else "No Answer" }}
+                </span>
+            </p>
+            <p>Correct Answer: <span class="correct">{{ correct_answer }}</span></p>
+        </div>
+        {% endfor %}
+
+        <a href="{{ url_for('index') }}"><button>Back to Home</button></a>
+    </div>
+</body>
+</html>

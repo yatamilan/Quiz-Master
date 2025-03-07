@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ difficulty.capitalize() }} Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/Images/luffy1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+        h1 {
+            margin-top: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        form {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        let timeLeft = 60;
+        const timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById("timer").textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                document.getElementById("quiz-form").submit();
+            }
+        }, 1000);
+    </script>
+</head>
+<body>
+    <h1>{{ difficulty.capitalize() }} Quiz</h1>
+    <p>Time Left: <span id="timer">60</span> seconds</p>
+
+    <form id="quiz-form" action="{{ url_for('quiz', difficulty=difficulty) }}" method="POST">
+        {% for question in questions %}
+        <div>
+            <p>{{ question.question }}</p>
+            <label><input type="radio" name="q{{ loop.index0 }}" value="{{ question.options[0] }}"> {{ question.options[0] }}</label><br>
+            <label><input type="radio" name="q{{ loop.index0 }}" value="{{ question.options[1] }}"> {{ question.options[1] }}</label><br>
+            <label><input type="radio" name="q{{ loop.index0 }}" value="{{ question.options[2] }}"> {{ question.options[2] }}</label><br>
+            <label><input type="radio" name="q{{ loop.index0 }}" value="{{ question.options[3] }}"> {{ question.options[3] }}</label><br>
+        </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
